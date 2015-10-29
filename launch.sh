@@ -5,7 +5,7 @@
 #declare array in bash
 declare -a arrayInstance
 
-mapfile -t arrayInstance < < (aws ec2 rin-instances --image-id ami-d05e75b8 --count $1 --instance-type t2.micro --key-name itmo544-fall2015 --security=group-ids sg-6d6a7c0a --subnet-id subnet-6bb1a51c --associate-public-ip-address --iam-instance-profile Name=Farah-Abdulsamad --user-data file://install-env.sh --output table | grep InstanceId | sed "s/|//g" tr -d ' ' | sed "s/InstanceId//g")
+mapfile -t arrayInstance < <(aws ec2 run-instances --image-id ami-d05e75b8 --count $1 --instance-type t2.micro --key-name itmo544-fall2015 --security=group-ids sg-6d6a7c0a --subnet-id subnet-6bb1a51c --associate-public-ip-address --iam-instance-profile Name=Farah-Abdulsamad --user-data file://install-env.sh --output table | grep InstanceId | sed "s/|//g" tr -d ' ' | sed "s/InstanceId//g")
 
 #display the content of the array
 echo ${arrayInstance[@]}
