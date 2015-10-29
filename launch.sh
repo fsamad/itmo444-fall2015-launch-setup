@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#./cleanup.sh
+./cleanup.sh
 
 #declare array in bash
 declare -a arrayInstance
