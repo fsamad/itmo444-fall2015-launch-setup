@@ -5,7 +5,7 @@
 #declare array in bash
 declare -a arrayInstance
 
-mapfile -t arrayInstance < <(aws ec2 run-instances --image-id ami-d05e75b8 --count $1 --instance-type t2.micro --key-name itmo544-fall2015 --security-group-ids sg-6d6a7c0a --subnet-id subnet-6bb1a51c --associate-public-ip-address --iam-instance-profile Name=Farah-Abdulsamad --user-data file://install-env.sh --output table | grep InstanceId | sed "s/|//g" | tr -d ' ' | sed "s/InstanceId//g")
+mapfile -t arrayInstance < <(aws ec2 run-instances --image-id ami-d05e75b8 --count $1 --instance-type t2.micro --key-name itmo544-fall2015 --security-group-ids sg-6d6a7c0a --subnet-id subnet-6bb1a51c --associate-public-ip-address --iam-instance-profile Name=phpDeveloperRole --user-data file://install-env.sh --output table | grep InstanceId | sed "s/|//g" | tr -d ' ' | sed "s/InstanceId//g")
 
 #display the content of the array
 echo ${arrayInstance[@]}
@@ -25,7 +25,7 @@ aws elb register-instances-with-load-balancer --load-balancer-name $2 --instance
 aws elb configure-health-check --load-balancer-name $2 --health-check Target=HTTP:80/index.html,Interval=30,UnhealthyThreshold=2 HealthyThreshold=2,Timeout=3
 
 #launch configuration
-aws autoscaling create-launch-configuration --launch-configuration-name itmo-launch-conf --image-id ami-d05e75b8 --key-name itmo444-fall2015 --security-groups sg-6d6a7c0a --instance-type t2.micro --user-data file://install-env.sh --iam-instance-profile Farah-Abdulsamad
+aws autoscaling create-launch-configuration --launch-configuration-name itmo-launch-conf --image-id ami-d05e75b8 --key-name itmo444-fall2015 --security-groups sg-6d6a7c0a --instance-type t2.micro --user-data file://install-env.sh --iam-instance-profile phpDeveloperRole 
 
 #creating the autoscaling group
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-autoscaling-group --launch-configuration-name itmo-launch-conf --load-balancer-names $2 --health-check-type ELB --min-size 3 --max-size 6 desired-capacity 3 --default-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier subnet-6bb1a51c 
