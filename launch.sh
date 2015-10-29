@@ -22,7 +22,7 @@ echo $ELBURL
 aws elb register-instances-with-load-balancer --load-balancer-name $2 --instances ${arrayInstance[@]}
 
 #health check for the load balancer
-aws elb configure-health-check --load-balancer-name $2 --health-check Target=HTTP:80/index.html,interval=30,unhealthyThreshold=2,HealthyThreshold=2,Timeout=3
+aws elb configure-health-check --load-balancer-name $2 --health-check Target=HTTP:80/index.html,Interval=30,UnhealthyThreshold=2 HealthyThreshold=2,Timeout=3
 
 #launch configuration
 aws autoscaling create-launch-configuration --launch-configuration-name itmo-launch-conf --image-id ami-d05e75b8 --key-name itmo444-fall2015 --security-groups sg-6d6a7c0a --instance-type t2.micro --user-data file://install-env.sh --iam-instance-profile Farah-Abdulsamad
