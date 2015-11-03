@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt-get -y update   
+apt-get update -y  
 sudo apt-get install -y apache2 git php5 php5-curl mysql-client curl php5-mysql
 
 git clone https://github.com/fsamad/itmo444-fall2015-app-setup.git
