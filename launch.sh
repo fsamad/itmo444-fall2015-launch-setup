@@ -34,7 +34,7 @@ aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-autosca
 sudo aws rds create-subnet-group --db-subnet-group-name mp1 --db-subnet-group-description "group for mp1" --subnet-ids subnet-95a792cc subnet-b2333cc5 
 
 #cloud watch
-PolicyARN1=(`aws autoscaling put-scaling-policy --policy-name policy-1 --auto-scaling-group-name itmo-autoscaling-group --scaling-adjustment 1 --adjusment-type ChangeInCapacity`);
+PolicyARN1=(`aws autoscaling put-scaling-policy --policy-name policy-1 --auto-scaling-group-name itmo-autoscaling-group --scaling-adjustment 1 --adjustment-type ChangeInCapacity`);
 
 PolicyARN2=(`aws autoscaling put-scaling-policy --policy-name policy-2 --auto-scaling-group-name itmo-autoscaling-group --scaling-adjustment 1 --adjustment-type ChangeInCapacity`);
 
