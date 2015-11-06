@@ -42,7 +42,7 @@ aws cloudwatch put-metric-alarm --alarm-name AddCapacity --metric-name CPUUtiliz
 aws cloudwatch put-metric-alarm --alarm-name RemoveCapacity --metric-name CPUUtilization --namespace AWS/EC2 --statistic Average --period 120 --threshold 10 --comparison-operator LessThanOrEqualToThreshold --dimensions "Name=AutoScalingGroupName,Value=itmo-autoscaling-group" --evaluation-perids 2 --alarm-actions $PolicyARN2   
 
 #creating the databse
-sudo aws rds create-db-subnet-group --db-subnet-group-name mp1 --db-subnet-group-description "group for mp1" --subnet-ids subnet-95a792cc subnet-b2333cc5
+sudo aws rds create-subnet-group --db-subnet-group-name mp1 --db-subnet-group-description "group for mp1" --subnet-ids subnet-95a792cc subnet-b2333cc5
 
 sudo aws rds create-db-instance --db-instance-identifier fabdelsa-mp1 --db-instance-class db.t2.micro --engine MySQL --master-username fabdelsa --master-user-password fabdelsa --allocated-storage 5 --db-subnet-group-name mp1
 
