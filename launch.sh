@@ -43,6 +43,6 @@ aws cloudwatch put-metric-alarm --alarm-name RemoveCapacity --metric-name CPUUti
 #creating the databse
 aws rds create-db-subnet-group --db-subnet-group-name mp1 --db-subnet-group-description "group for mp1" --subnet-ids subnet-95a792cc subnet-b2333cc5
 
-aws rds create-db-instance --db-instance-identifier fabdelsa-mp1 --db-instance-class db.t2.micro --engine MySQL --master-username fabdelsa --master-user-password fabdelsa --allocated-storage 5 --db-subnet-group-name mp1
+aws rds create-db-instance --db-name farah-db --db-instance-identifier fabdelsa-mp1 --db-instance-class db.t2.micro --engine MySQL --master-username fabdelsa --master-user-password fabdelsa --allocated-storage 5 --db-subnet-group-name mp1 --publicly-accessible
 
-sudo aws rds wait db-instance-available --db-instance-identifier fabdelsa-mp1   
+aws rds wait db-instance-available --db-instance-identifier fabdelsa-mp1   
