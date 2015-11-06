@@ -33,6 +33,15 @@ aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-autosca
 #creating the databse
 sudo aws rds create-subnet-group --db-subnet-group-name mp1 --db-subnet-group-description "group for mp1" --subnet-ids subnet-95a792cc subnet-b2333cc5 
 
+#cloud watch
+PolicyARN1=(`aws autoscaling put-scaling-policy --policy-name policy-1 --auto-scaling-group-name itmo-autoscaling-group --scaling-adjusment-type ChangeInCapacity`);
+
+PolicyARN2=(`aws autoscaling put-scaling-policy --policy-name policy-2 --auto-scaling-group-name itmo-autoscaling-group --scaling-adjustment 1 --adjustment-type ChangeInCapacity`);
+
+aws cloudwatch put-metric-alarm --alarm-name AddCapacity --metric-name CPUUtilization --namespace AWS/EC2 --statistic Average --period 120 --threshold 30 --comparison-operator GreaterThanOrEqualToThreshold --dimensions "Name=AutoScalingGroupName,Value=itmo-autoscaling-group" --evaluation-periods 2 --alarm-actions $PolicyARN1
+
+aws cloudwatch put-metric-alarm --alarm-name AddCapacity --metric-name CPUUtilization --namespace AWS/EC2 --statistic Average --period 120 --threshold 10 --comparison-operator LessThanOrEqualToThreshold --dimensions "Name=AutoScalingGroupName,Value=itmo-autoscaling-group" --evaluation-perids 2 --alarm-actions $PolicyARN2   
+
 sudo aws rds create-db-instance --db-instance-identifier fabdelsa-mp1 --db-instance-class db.t2.micro --engine MySQL --master-username fabdelsa --master-user-password fabdelsa --allocated-storage 5 --db-subnet-group-name mp1
 
 sudo aws rds wait db-instance-available --db-instance-identifier fabdelsa-mp1   
