@@ -17,6 +17,10 @@ echo "instances are running"
 #creating the load balancer
 ELBURL=(`aws elb create-load-balancer --load-balancer-name $2 --listeners Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80 --security-groups sg-15ba5c73 --subnets subnet-95a792cc --output=text`);
 echo $ELBURL
+echo -e "\nFinished launching ELB and waiting 25 seconds"
+echo -e "\n"
+for i in {0..25};do echo -ne '.';sleep 1;done
+echo -e "\n"
 
 #registering the load balancer
 aws elb register-instances-with-load-balancer --load-balancer-name $2 --instances ${arrayInstance[@]}
