@@ -15,7 +15,7 @@ sudo php composer.phar require aws/aws-sdk-php &> /tmp/runcomposer.txt
 
 sudo mv vendor /var/www/html &> /tmp/movevendor.txt
 
-#sudo php /var/www/html/setup.php &> /tmp/database-setup.txt
+sudo php /var/www/html/setup.php &> /tmp/database-setup.txt
 
 
 echo "Hello" >  /tmp/hello.txt
