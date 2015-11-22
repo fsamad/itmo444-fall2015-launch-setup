@@ -29,6 +29,16 @@ aws elb register-instances-with-load-balancer --load-balancer-name $8 --instance
 #health check for the load balancer
 aws elb configure-health-check --load-balancer-name $8 --health-check Target=HTTP:80/index.html,Interval=50,UnhealthyThreshold=3,HealthyThreshold=3,Timeout=4
 
+#sns topic creation 
+ARN=(`aws sns create-topic --name mp2`)
+echo "This is the ARN: $ARN"
+
+aws sns set-topic-attributes --topic-arn $ARN --attribute-name DisplayName --attribute-value mp2
+
+#sns subscribe
+aws sns subscribe --topic-arn $ARN --protocol sms --notification-endpoint 13128334094
+
+
 #launch configuration
 aws autoscaling create-launch-configuration --launch-configuration-name itmo-fas-launch-conf --image-id $1 --key-name $4 --security-groups $5 --instance-type $3 --user-data file://install-webserver.sh --iam-instance-profile $7 
 
