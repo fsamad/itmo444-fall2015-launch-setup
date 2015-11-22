@@ -53,5 +53,3 @@ aws rds create-db-instance --db-name farah --db-instance-identifier fabdelsa-mp1
 aws rds wait db-instance-available --db-instance-identifier fabdelsa-mp1  
 
 
-#creating the topic
-aws sns create-topic --name mp2  
