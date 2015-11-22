@@ -51,3 +51,6 @@ aws rds create-db-subnet-group --db-subnet-group-name mp1 --db-subnet-group-desc
 aws rds create-db-instance --db-name farah --db-instance-identifier fabdelsa-mp1 --db-instance-class db.t2.micro --engine MySQL --master-username fabdelsa --master-user-password fabdelsa --allocated-storage 5 --vpc-security-group-ids $5 --db-subnet-group-name mp1 --publicly-accessible
 
 aws rds wait db-instance-available --db-instance-identifier fabdelsa-mp1   
+
+#creating the topic
+aws sns create-topic --name mp2
