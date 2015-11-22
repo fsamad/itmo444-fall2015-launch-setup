@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ARN=('aws sns create-topic --name mp2')
+ARN=(`aws sns create-topic --name mp2`)
 echo "This is the ARN: $ARN"
 
 aws sns set-topic-attributes --topic-arn $ARN --attribute-name DisplayName --attribute-value mp2
